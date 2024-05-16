@@ -32,6 +32,7 @@ const PersonDetail = () => {
 
     useEffect(() => {
         // TODO: Add HTTP req.
+        // metoda pro stažení dat ze serveru
         apiGet("/api/persons/" + id).then((data) => setPerson(data))
     }, [id]);
     const country = Country.CZECHIA === person.country ? "Česká republika" : "Slovensko";
