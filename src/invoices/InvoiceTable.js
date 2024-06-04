@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export function InvoiceTable({items}) {
+export function InvoiceTable({items, deletePerson}) {
     
     return (
         <div>
@@ -43,6 +43,7 @@ export function InvoiceTable({items}) {
                                     Upravit
                                 </Link>
                                 <button
+                                    onClick={() => deletePerson(item._id)}
                                     className="btn btn-sm btn-danger"
                                 >
                                     Odstranit

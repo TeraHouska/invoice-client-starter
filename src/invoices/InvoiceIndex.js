@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { InvoiceTable } from "./InvoiceTable";
-import { apiGet } from "../utils/api";
+import { apiDelete, apiGet } from "../utils/api";
 
 export function InvoiceIndex() {
 
@@ -14,10 +14,20 @@ export function InvoiceIndex() {
         fetchInvoices();
     }, []);
 
+    async function deletePerson(id) {
+        try {
+            await apiDelete("/api/invoices/" + id);
+        } catch (error) {
+            alert(error.message);
+            console.log(error.message);
+        }
+        setInvoices(invoices.filter((invoice) => invoice._id !== id));
+    }
+
     return (
         <div>
             <h1>Seznam faktur</h1>
-            <InvoiceTable items={invoices} />
+            <InvoiceTable items={invoices} deletePerson={deletePerson} />
         </div>
     )
 }
