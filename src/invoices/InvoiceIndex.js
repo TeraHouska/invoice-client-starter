@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { InvoiceTable } from "./InvoiceTable";
 import { apiDelete, apiGet } from "../utils/api";
 
-export function InvoiceIndex() {
+export default function InvoiceIndex() {
 
     const [invoices, setInvoices] = useState([]);
 
