@@ -54,6 +54,7 @@ export const apiGet = (url, params) => {
 };
 
 export const apiPost = (url, data) => {
+    console.log(JSON.stringify(data));
     const requestOptions = {
         method: "POST",
         headers: {"Content-Type": "application/json"},
