@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { apiGet } from "../utils/api";
+import dateStringFormatter from "../utils/dateStringFormatter";
 
 
 export default function InvoiceDetail() {
@@ -37,24 +38,24 @@ export default function InvoiceDetail() {
             <hr/>
             <h3>Faktura č. {invoice.invoiceNumber}</h3>
             <p>
-                <strong>Dodavatel</strong>
+                <strong>Dodavatel</strong> <small>(identifikační číslo)</small>
                 <br/>
-                {invoice.seller.name} ({invoice.seller.identificationNumber})
+                {invoice.seller.name} <small>({invoice.seller.identificationNumber})</small>
             </p>
             <p>
-                <strong>Odběratel</strong>
+                <strong>Odběratel</strong> <small>(identifikační číslo)</small>
                 <br/>
-                {invoice.buyer.name} ({invoice.buyer.identificationNumber})
+                {invoice.buyer.name} <small>({invoice.buyer.identificationNumber})</small>
             </p>
             <p>
                 <strong>Vystaveno</strong>
                 <br/>
-                {invoice.issued}
+                {dateStringFormatter(invoice.issued, true)}
             </p>
             <p>
                 <strong>Splatnost</strong>
                 <br/>
-                {invoice.dueDate}
+                {dateStringFormatter(invoice.dueDate, true)}
             </p>
             <p>
                 <strong>Produkt</strong>
@@ -64,7 +65,7 @@ export default function InvoiceDetail() {
             <p>
                 <strong>Částka</strong>
                 <br/>
-                {invoice.price}
+                {invoice.price} Kč
             </p>
             <p>
                 <strong>Poznámka</strong>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import dateStringFormatter from "../utils/dateStringFormatter";
 
 export function InvoiceTable({items, deletePerson}) {
     
@@ -16,7 +17,7 @@ export function InvoiceTable({items, deletePerson}) {
                     <th>Dodavatel</th>
                     <th>Odběratel</th>
                     <th>Datum vystavení</th>
-                    <th>Částka</th>
+                    <th>Částka (Kč)</th>
                     <th>Akce</th>
                 </tr>
                 </thead>
@@ -26,7 +27,7 @@ export function InvoiceTable({items, deletePerson}) {
                             <td>{index + 1}</td>
                             <td>{item.seller.name}</td>
                             <td>{item.buyer.name}</td>
-                            <td>{item.issued}</td>
+                            <td>{dateStringFormatter(item.issued, true)}</td>
                             <td>{item.price}</td>
                             <td>
                                 <div className="btn-group">
