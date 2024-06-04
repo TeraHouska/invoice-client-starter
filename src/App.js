@@ -66,6 +66,7 @@ export function App() {
           <Route path="/invoices">
             <Route index element={<InvoiceIndex />} />
             <Route path="create" element={<InvoiceForm />} />
+            <Route path="edit/:id" element={<InvoiceForm />} />
           </Route>
         </Routes>
       </div>
