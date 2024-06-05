@@ -33,7 +33,7 @@ export default function StatsInvoices() {
             <p>
                 <strong>Celkem faktur:</strong>
                 <br/>
-                {stats.count}
+                {stats.invoicesCount}
             </p>
         </div>
     )
