@@ -21,7 +21,7 @@
  */
 
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 import {apiGet} from "../utils/api";
 import Country from "./Country";
@@ -73,6 +73,7 @@ const PersonDetail = () => {
                 <br/>
                 {person.note}
             </p>
+            <Link className="btn btn-small btn-primary" to={"/persons"} >Zpět</Link>
         </div>
     );
 };

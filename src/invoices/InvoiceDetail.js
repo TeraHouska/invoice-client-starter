@@ -4,6 +4,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { apiGet } from "../utils/api";
 import dateStringFormatter from "../utils/dateStringFormatter";
+import { Link } from "react-router-dom";
 
 
 export default function InvoiceDetail() {
@@ -72,6 +73,7 @@ export default function InvoiceDetail() {
                 <br/>
                 {invoice.note}
             </p>
+            <Link className="btn btn-small btn-primary" to={"/invoices"} >Zpět</Link>
         </div>
     )   
 }
