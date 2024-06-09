@@ -237,7 +237,6 @@ const PersonForm = () => {
                 />
 
                 <InputField
-                    required={true}
                     type="text"
                     name="note"
                     label="Poznámka"

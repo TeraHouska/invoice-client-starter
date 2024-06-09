@@ -68,11 +68,14 @@ export default function InvoiceDetail() {
                 <br/>
                 {invoice.price} Kč
             </p>
+            
+            { invoice.note ? 
             <p>
                 <strong>Poznámka</strong>
                 <br/>
                 {invoice.note}
-            </p>
+            </p> 
+            : <></>}
             <Link className="btn btn-small btn-primary" to={"/invoices"} >Zpět</Link>
         </div>
     )   

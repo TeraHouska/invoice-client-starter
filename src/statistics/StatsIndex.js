@@ -8,7 +8,7 @@ export default function StatsIndex() {
     return (
         <div className="row">
             <div className="col">
-                <h1>Statistiky osob</h1>
+                <h1>Celkové příjmy osob</h1>
                 <StatsPersons />
             </div>
             <div className="col">

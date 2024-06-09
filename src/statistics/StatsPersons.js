@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { apiGet } from "../utils/api";
+import { Link } from "react-router-dom";
 
 export default function StatsPersons() {
     const [personStats, setPersonStats] = useState([]);
@@ -19,9 +20,12 @@ export default function StatsPersons() {
 
     return (
         <div>
-            {personStats.map((stat, index) =>
+            {personStats.filter((stat) => stat.revenue != 0)
+            .map((stat, index) =>
                 <p key={index}>
-                    <strong>{stat.personName}</strong>
+                    <Link to={"/persons/show/" + stat.personId} className="text-decoration-none text-reset">
+                        <strong>{stat.personName}</strong> <small>({stat.personId})</small>
+                    </Link>
                     <br/>
                     {stat.revenue} Kč
                 </p>

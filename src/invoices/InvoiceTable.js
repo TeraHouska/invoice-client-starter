@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import dateStringFormatter from "../utils/dateStringFormatter";
 
-export function InvoiceTable({items, deletePerson}) {
+export function InvoiceTable({items, deletePerson, actionsEnabled=true}) {
     
     return (
         <div>
@@ -17,18 +17,29 @@ export function InvoiceTable({items, deletePerson}) {
                     <th>Dodavatel</th>
                     <th>Odběratel</th>
                     <th>Datum vystavení</th>
-                    <th>Částka (Kč)</th>
+                    <th>Částka</th>
+                    {actionsEnabled? 
                     <th>Akce</th>
+                    : <></>}
                 </tr>
                 </thead>
                 <tbody>
                     {items.map((item, index) => 
                         <tr key={index + 1}>
                             <td>{index + 1}</td>
-                            <td>{item.seller.name}</td>
-                            <td>{item.buyer.name}</td>
+                            <td>
+                                <Link to={"/persons/show/" + item.seller._id} className="text-decoration-none text-reset">
+                                    {item.seller.name}
+                                </Link>
+                            </td>
+                            <td>
+                                <Link to={"/persons/show/" + item.buyer._id} className="text-decoration-none text-reset">
+                                    {item.buyer.name}
+                                </Link>
+                            </td>
                             <td>{dateStringFormatter(item.issued, true)}</td>
-                            <td>{item.price}</td>
+                            <td>{item.price} Kč</td>
+                            {actionsEnabled? 
                             <td>
                                 <div className="btn-group">
                                 <Link
@@ -51,13 +62,16 @@ export function InvoiceTable({items, deletePerson}) {
                                 </button>
                                 </div>
                             </td>
+                            : <></>}
                         </tr>
                     )}
                 </tbody>
             </table>
+            {actionsEnabled?
             <Link to={"/invoices/create"} className="btn btn-success">
                 Nová faktura
             </Link>
+            : <></>}
         </div>
     )
 }

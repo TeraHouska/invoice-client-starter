@@ -25,55 +25,60 @@ import {Link, useParams} from "react-router-dom";
 
 import {apiGet} from "../utils/api";
 import Country from "./Country";
+import InvoicesByPerson from "../invoices/InvoicesByPerson";
 
 const PersonDetail = () => {
     const {id} = useParams();
     const [person, setPerson] = useState({});
 
     useEffect(() => {
-        // TODO: Add HTTP req.
-        // metoda pro stažení dat ze serveru
         apiGet("/api/persons/" + id).then((data) => setPerson(data))
     }, [id]);
     const country = Country.CZECHIA === person.country ? "Česká republika" : "Slovensko";
 
     return (
-        <div>
-            <h1>Detail osoby</h1>
-            <hr/>
-            <h3>{person.name} ({person.identificationNumber})</h3>
-            <p>
-                <strong>DIČ:</strong>
-                <br/>
-                {person.taxNumber}
-            </p>
-            <p>
-                <strong>Bankovní účet:</strong>
-                <br/>
-                {person.accountNumber}/{person.bankCode} ({person.iban})
-            </p>
-            <p>
-                <strong>Tel.:</strong>
-                <br/>
-                {person.telephone}
-            </p>
-            <p>
-                <strong>Mail:</strong>
-                <br/>
-                {person.mail}
-            </p>
-            <p>
-                <strong>Sídlo:</strong>
-                <br/>
-                {person.street}, {person.city},
-                {person.zip}, {country}
-            </p>
-            <p>
-                <strong>Poznámka:</strong>
-                <br/>
-                {person.note}
-            </p>
-            <Link className="btn btn-small btn-primary" to={"/persons"} >Zpět</Link>
+        <div className="row">
+            <div className="col">
+                <h1>Detail osoby</h1>
+                <hr/>
+                <h3>{person.name} ({person.identificationNumber})</h3>
+                <p>
+                    <strong>DIČ:</strong>
+                    <br/>
+                    {person.taxNumber}
+                </p>
+                <p>
+                    <strong>Bankovní účet:</strong>
+                    <br/>
+                    {person.accountNumber}/{person.bankCode} ({person.iban})
+                </p>
+                <p>
+                    <strong>Tel.:</strong>
+                    <br/>
+                    {person.telephone}
+                </p>
+                <p>
+                    <strong>Mail:</strong>
+                    <br/>
+                    {person.mail}
+                </p>
+                <p>
+                    <strong>Sídlo:</strong>
+                    <br/>
+                    {person.street}, {person.city}, {person.zip}, {country}
+                </p>
+                { person.note ?
+                <p>
+                    <strong>Poznámka:</strong>
+                    <br/>
+                    {person.note}
+                </p>
+                : <></>}
+                <Link className="btn btn-small btn-primary" to={"/persons"} >Zpět</Link>
+            </div>
+            <div className="col">
+                <InvoicesByPerson personId={person.identificationNumber} />
+            </div>
         </div>
     );
 };
