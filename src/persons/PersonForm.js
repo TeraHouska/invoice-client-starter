@@ -66,7 +66,10 @@ const PersonForm = () => {
             .then((data) => {
                 setSent(true);
                 setSuccess(true);
-                navigate("/persons");
+                const sleep = ms => new Promise(r => setTimeout(r, ms));
+                sleep(2500).then(
+                    () => {navigate("/persons");}
+                )
             })
             .catch((error) => {
                 console.log(error.message);

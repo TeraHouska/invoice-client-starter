@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import dateStringFormatter from "../utils/dateStringFormatter";
 
-export function InvoiceTable({items, deletePerson, actionsEnabled=true}) {
+export function InvoiceTable({items, deleteInvoice, actionsEnabled=true}) {
     
     return (
         <div>
@@ -55,7 +55,7 @@ export function InvoiceTable({items, deletePerson, actionsEnabled=true}) {
                                     Upravit
                                 </Link>
                                 <button
-                                    onClick={() => deletePerson(item._id)}
+                                    onClick={() => deleteInvoice(item._id)}
                                     className="btn btn-sm btn-danger"
                                 >
                                     Odstranit

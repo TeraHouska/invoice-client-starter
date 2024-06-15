@@ -1,7 +1,5 @@
 import React from "react";
 
-export function FlashMessage({ theme, text }) {
+export default function FlashMessage({ theme, text }) {
   return <div className={"alert alert-" + theme}>{text}</div>;
 }
-
-export default FlashMessage;

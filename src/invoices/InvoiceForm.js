@@ -52,7 +52,10 @@ export default function InvoiceForm() {
             .then((data) => {
                 setSent(true);
                 setSuccess(true);
-                navigate("/invoices");
+                const sleep = ms => new Promise(r => setTimeout(r, ms));
+                sleep(2500).then(
+                    () => {navigate("/invoices");}
+                )
             })
             .catch((error) => {
                 console.log(error.message);

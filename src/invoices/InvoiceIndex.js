@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { InvoiceTable } from "./InvoiceTable";
 import { apiDelete, apiGet } from "../utils/api";
 import InvoiceFilter from "./InvoiceFilter";
+import FlashMessage from "../components/FlashMessage";
 
 export default function InvoiceIndex() {
 
@@ -15,6 +16,7 @@ export default function InvoiceIndex() {
         maxPrice: undefined,
         limit: undefined
     });
+    const [deleteMessage, setDeleteMessage] = useState(false);
 
     useEffect(() => {
         async function fetchInvoices() {
@@ -29,14 +31,18 @@ export default function InvoiceIndex() {
         fetchPeople();
     }, []);
 
-    async function deletePerson(id) {
+    async function deleteInvoice(id) {
         try {
             await apiDelete("/api/invoices/" + id);
+            setInvoices(invoices.filter((invoice) => invoice._id !== id));
+            setDeleteMessage(true);
+            const sleep = ms => new Promise(r => setTimeout(r, ms));
+            await sleep(2500);
+            setDeleteMessage(false);
         } catch (error) {
             alert(error.message);
             console.log(error.message);
         }
-        setInvoices(invoices.filter((invoice) => invoice._id !== id));
     }
 
     function handleChange(e) {
@@ -62,8 +68,11 @@ export default function InvoiceIndex() {
     return (
         <div>
             <h1>Seznam faktur</h1>
+            {deleteMessage ? 
+            <FlashMessage theme="success" text="Faktura byla úspěšně odstraněna."/>
+            : null}
             <InvoiceFilter handleChange={handleChange} handleSubmit={handleSubmit} filter={filter} people={people} />
-            <InvoiceTable items={invoices} deletePerson={deletePerson} />
+            <InvoiceTable items={invoices} deleteInvoice={deleteInvoice} />
         </div>
     )
 }

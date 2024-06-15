@@ -25,18 +25,25 @@ import React, {useEffect, useState} from "react";
 import {apiDelete, apiGet} from "../utils/api";
 
 import PersonTable from "./PersonTable";
+import FlashMessage from "../components/FlashMessage";
 
 const PersonIndex = () => {
     const [persons, setPersons] = useState([]);
+    const [deleted, setDeleted] = useState(false);
 
     const deletePerson = async (id) => {
         try {
             await apiDelete("/api/persons/" + id);
+            setPersons(persons.filter((item) => item._id !== id));
+            setDeleted(true);
+            const sleep = ms => new Promise(r => setTimeout(r, ms));
+            await sleep(2500);
+            setDeleted(false);
         } catch (error) {
             console.log(error.message);
             alert(error.message)
         }
-        setPersons(persons.filter((item) => item._id !== id));
+        
     };
 
     useEffect(() => {
@@ -46,6 +53,9 @@ const PersonIndex = () => {
     return (
         <div>
             <h1>Seznam osob</h1>
+            {deleted ? 
+                <FlashMessage theme="success" text="Smazání proběhlo v pořádku."/>
+                : null}
             <PersonTable
                 deletePerson={deletePerson}
                 items={persons}
