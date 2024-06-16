@@ -163,7 +163,6 @@ export default function InvoiceForm() {
                     value={invoice.seller._id}
                     handleChange={(e) => {
                         setInvoice({...invoice, seller: {_id: e.target.value}});
-                        console.log(e.target.value);
                     }}
                 />
 
@@ -176,7 +175,6 @@ export default function InvoiceForm() {
                     value={invoice.buyer._id}
                     handleChange={(e) => {
                         setInvoice({...invoice, buyer: {_id: e.target.value}});
-                        console.log(e.target.value);
                     }}
                 />
 

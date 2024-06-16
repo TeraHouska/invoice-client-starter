@@ -63,7 +63,7 @@ const PersonForm = () => {
         e.preventDefault();
 
         (id ? apiPut("/api/persons/" + id, person) : apiPost("/api/persons", person))
-            .then((data) => {
+            .then(() => {
                 setSent(true);
                 setSuccess(true);
                 const sleep = ms => new Promise(r => setTimeout(r, ms));

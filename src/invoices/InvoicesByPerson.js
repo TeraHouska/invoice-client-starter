@@ -2,25 +2,25 @@ import React, { useEffect, useState } from "react";
 import { apiGet } from "../utils/api";
 import { InvoiceTable } from "./InvoiceTable";
 
-export default function InvoicesByPerson({personId}) {
+export default function InvoicesByPerson({personIdentificationNumber}) {
 
     const [purchases, setPurchases] = useState([]);
     const [sales, setSales] = useState([]);
 
     useEffect(() => {
         async function fetchPurchases() {
-            const data = await apiGet("/api/identification/" + personId + "/purchases");
+            const data = await apiGet("/api/identification/" + personIdentificationNumber + "/purchases");
             setPurchases(data);
         };
         async function fetchSales() {
-            const data = await apiGet("/api/identification/" + personId + "/sales");
+            const data = await apiGet("/api/identification/" + personIdentificationNumber + "/sales");
             setSales(data);
         };
-        if (personId) {
+        if (personIdentificationNumber) {
             fetchPurchases();
             fetchSales();
         }
-        }, [personId]);
+        }, [personIdentificationNumber]);
 
     return (
         <div>

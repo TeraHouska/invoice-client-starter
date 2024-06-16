@@ -77,7 +77,7 @@ const PersonDetail = () => {
                 <Link className="btn btn-small btn-primary" to={"/persons"} >Zpět</Link>
             </div>
             <div className="col">
-                <InvoicesByPerson personId={person.identificationNumber} />
+                <InvoicesByPerson personIdentificationNumber={person.identificationNumber} />
             </div>
         </div>
     );
