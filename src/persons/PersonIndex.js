@@ -29,16 +29,16 @@ import FlashMessage from "../components/FlashMessage";
 
 const PersonIndex = () => {
     const [persons, setPersons] = useState([]);
-    const [deleted, setDeleted] = useState(false);
+    const [showDeleteMessage, setShowDeleteMessage] = useState(false);
 
     const deletePerson = async (id) => {
         try {
             await apiDelete("/api/persons/" + id);
             setPersons(persons.filter((item) => item._id !== id));
-            setDeleted(true);
+            setShowDeleteMessage(true);
             const sleep = ms => new Promise(r => setTimeout(r, ms));
             await sleep(2500);
-            setDeleted(false);
+            setShowDeleteMessage(false);
         } catch (error) {
             console.log(error.message);
             alert(error.message)
@@ -53,7 +53,7 @@ const PersonIndex = () => {
     return (
         <div>
             <h1>Seznam osob</h1>
-            {deleted ? 
+            {showDeleteMessage ? 
                 <FlashMessage theme="success" text="Smazání proběhlo v pořádku."/>
                 : null}
             <PersonTable

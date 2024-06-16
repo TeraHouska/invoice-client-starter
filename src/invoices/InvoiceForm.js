@@ -40,7 +40,6 @@ export default function InvoiceForm() {
             setPeople(data);
             const defaultId = data[0]._id;
             setInvoice({...invoice, buyer: {_id: defaultId}, seller: {_id: defaultId}});
-            console.log(JSON.stringify(invoice));
         }
         fetchPeople();
     }, [])
@@ -49,7 +48,7 @@ export default function InvoiceForm() {
         e.preventDefault();
 
         (id ? apiPut("/api/invoices/" + id, invoice) : apiPost("/api/invoices", invoice))
-            .then((data) => {
+            .then(() => {
                 setSent(true);
                 setSuccess(true);
                 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -65,9 +64,6 @@ export default function InvoiceForm() {
             });
     }
 
-    const sent = sentState;
-    const success = successState;
-
     if (people.length == 0) {
         return <p>Nenalezeny žádné osoby</p>
     } 
@@ -79,10 +75,10 @@ export default function InvoiceForm() {
             {errorState ? (
                 <div className="alert alert-danger">{errorState}</div>
             ) : null}
-            {sent && (
+            {sentState && (
                 <FlashMessage
-                    theme={success ? "success" : ""}
-                    text={success ? "Uložení faktury proběhlo úspěšně." : ""}
+                    theme={successState ? "success" : ""}
+                    text={successState ? "Uložení faktury proběhlo úspěšně." : ""}
                 />
             )}
             <form onSubmit={handleSubmit}>

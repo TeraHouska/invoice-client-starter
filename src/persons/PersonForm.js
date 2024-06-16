@@ -79,9 +79,6 @@ const PersonForm = () => {
             });
     };
 
-    const sent = sentState;
-    const success = successState;
-
     return (
         <div>
             <h1>{id ? "Upravit" : "Vytvořit"} osobnost</h1>
@@ -89,10 +86,10 @@ const PersonForm = () => {
             {errorState ? (
                 <div className="alert alert-danger">{errorState}</div>
             ) : null}
-            {sent && (
+            {sentState && (
                 <FlashMessage
-                    theme={success ? "success" : ""}
-                    text={success ? "Uložení osobnosti proběhlo úspěšně." : ""}
+                    theme={successState ? "success" : ""}
+                    text={successState ? "Uložení osobnosti proběhlo úspěšně." : ""}
                 />
             )}
             <form onSubmit={handleSubmit}>
@@ -109,7 +106,8 @@ const PersonForm = () => {
                     }}
                 />
 
-                <InputField
+                {id ? null
+                : <InputField
                     required={true}
                     type="text"
                     name="identificationNumber"
@@ -120,7 +118,7 @@ const PersonForm = () => {
                     handleChange={(e) => {
                         setPerson({...person, identificationNumber: e.target.value});
                     }}
-                />
+                />}
 
                 <InputField
                     required={true}

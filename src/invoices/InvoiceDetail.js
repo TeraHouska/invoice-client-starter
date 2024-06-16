@@ -39,12 +39,12 @@ export default function InvoiceDetail() {
             <hr/>
             <h3>Faktura č. {invoice.invoiceNumber}</h3>
             <p>
-                <strong>Dodavatel</strong> <small>(identifikační číslo)</small>
+                <strong>Dodavatel</strong> <small>(IČ)</small>
                 <br/>
                 {invoice.seller.name} <small>({invoice.seller.identificationNumber})</small>
             </p>
             <p>
-                <strong>Odběratel</strong> <small>(identifikační číslo)</small>
+                <strong>Odběratel</strong> <small>(IČ)</small>
                 <br/>
                 {invoice.buyer.name} <small>({invoice.buyer.identificationNumber})</small>
             </p>

@@ -16,7 +16,7 @@ export default function InvoiceIndex() {
         maxPrice: undefined,
         limit: undefined
     });
-    const [deleteMessage, setDeleteMessage] = useState(false);
+    const [showDeleteMessage, setShowDeleteMessage] = useState(false);
 
     useEffect(() => {
         async function fetchInvoices() {
@@ -35,10 +35,10 @@ export default function InvoiceIndex() {
         try {
             await apiDelete("/api/invoices/" + id);
             setInvoices(invoices.filter((invoice) => invoice._id !== id));
-            setDeleteMessage(true);
+            setShowDeleteMessage(true);
             const sleep = ms => new Promise(r => setTimeout(r, ms));
             await sleep(2500);
-            setDeleteMessage(false);
+            setShowDeleteMessage(false);
         } catch (error) {
             alert(error.message);
             console.log(error.message);
@@ -68,9 +68,9 @@ export default function InvoiceIndex() {
     return (
         <div>
             <h1>Seznam faktur</h1>
-            {deleteMessage ? 
-            <FlashMessage theme="success" text="Faktura byla úspěšně odstraněna."/>
-            : null}
+            {showDeleteMessage ? 
+                <FlashMessage theme="success" text="Faktura byla úspěšně odstraněna."/>
+                : null}
             <InvoiceFilter handleChange={handleChange} handleSubmit={handleSubmit} filter={filter} people={people} />
             <InvoiceTable items={invoices} deleteInvoice={deleteInvoice} />
         </div>
