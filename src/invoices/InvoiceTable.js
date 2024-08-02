@@ -16,7 +16,8 @@ export function InvoiceTable({items, deleteInvoice, actionsEnabled=true}) {
                     <th>#</th>
                     <th>Dodavatel</th>
                     <th>Odběratel</th>
-                    <th>Datum vystavení</th>
+                    <th>Datum splatnosti</th>
+                    <th>Produkt</th>
                     <th>Částka</th>
                     {actionsEnabled? 
                     <th>Akce</th>
@@ -37,7 +38,8 @@ export function InvoiceTable({items, deleteInvoice, actionsEnabled=true}) {
                                     {item.buyer.name}
                                 </Link>
                             </td>
-                            <td>{dateStringFormatter(item.issued, true)}</td>
+                            <td>{dateStringFormatter(item.dueDate, true)}</td>
+                            <td>{item.product}</td>
                             <td>{item.price} Kč</td>
                             {actionsEnabled? 
                             <td>

@@ -146,8 +146,8 @@ export default function InvoiceForm() {
                     required={true}
                     type="number"
                     name="vat"
-                    label="Číslo vat"
-                    prompt="Zadejte číslo vat"
+                    label="Daňová sazba"
+                    prompt="Zadejte daňovou sazbu [%]"
                     value={invoice.vat}
                     handleChange={(e) => {
                         setInvoice({...invoice, vat: e.target.value});
